@@ -1,0 +1,16 @@
+services:
+  crags:
+    build: .
+    container_name: crags-job-log
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # Password for the first administrator account (only used on first start).
+      # If left empty, a random one is printed in `docker compose logs` and saved to ./data/initial-admin.txt
+      ADMIN_USERNAME: admin
+      ADMIN_PASSWORD: ""
+      # Set to "1" when serving over HTTPS (behind a reverse proxy)
+      CRAGS_SECURE_COOKIES: "0"
+    volumes:
+      - ./data:/data
